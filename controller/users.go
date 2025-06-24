@@ -89,3 +89,21 @@ func UpdateUserCTRL(ctx *gin.Context) {
 		Message: "Berhasil update user",
 	})
 }
+func DeleteUser(ctx *gin.Context) {
+	id := ctx.Param("id")
+	err := models.DeleteUser(id)
+	if err != nil {
+		ctx.JSON(500, models.Response{
+			Success: false,
+			Message: "Gagal update user",
+			Errors:  err.Error(),
+		})
+		return
+	}
+
+	ctx.JSON(200, models.Response{
+		Success: true,
+		Message: "Berhasil hapus user",
+	})
+
+}

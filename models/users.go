@@ -103,3 +103,24 @@ func UpdateUser(id string, newData Profile) error {
 
 	return err
 }
+func DeleteUser(id string) error {
+	conn, err := utils.DBConnect()
+	if err != nil {
+		return err
+	}
+	defer conn.Conn().Close(context.Background())
+
+	getUser := FindUserById(id)
+	if getUser.Id == 0 {
+		return fmt.Errorf("user dengan ID %s tidak ditemukan", id)
+	}
+
+	_, err = conn.Query(context.Background(), `
+		DELETE FROM users WHERE id = $1
+	`, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
