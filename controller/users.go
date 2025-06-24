@@ -66,7 +66,7 @@ func UpdateUserCTRL(ctx *gin.Context) {
 	var input models.Profile
 
 	if err := ctx.ShouldBindJSON(&input); err != nil {
-		ctx.JSON(400, models.Response{
+		ctx.JSON(http.StatusBadRequest, models.Response{
 			Success: false,
 			Message: "Invalid input",
 			Errors:  err.Error(),
@@ -76,7 +76,7 @@ func UpdateUserCTRL(ctx *gin.Context) {
 
 	err := models.UpdateUser(id, input)
 	if err != nil {
-		ctx.JSON(500, models.Response{
+		ctx.JSON(http.StatusInternalServerError, models.Response{
 			Success: false,
 			Message: "Gagal update user",
 			Errors:  err.Error(),
@@ -93,7 +93,7 @@ func DeleteUser(ctx *gin.Context) {
 	id := ctx.Param("id")
 	err := models.DeleteUser(id)
 	if err != nil {
-		ctx.JSON(500, models.Response{
+		ctx.JSON(http.StatusInternalServerError, models.Response{
 			Success: false,
 			Message: "Gagal update user",
 			Errors:  err.Error(),
@@ -101,7 +101,7 @@ func DeleteUser(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(200, models.Response{
+	ctx.JSON(http.StatusOK, models.Response{
 		Success: true,
 		Message: "Berhasil hapus user",
 	})
