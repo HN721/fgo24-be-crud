@@ -15,6 +15,13 @@ func MiddlewareFunc() gin.HandlerFunc {
 
 	}
 }
+
+// @Description list all users
+// @Tags users
+// @Accept json
+// @Produce json
+// @Success 200 {string} string "string"
+// @Router /users [get]
 func GetAlluser(ctx *gin.Context) {
 	search := ctx.DefaultQuery("search", "")
 	users := models.FindAllUser(search)

@@ -7,6 +7,11 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// @title           CRUD Users
+// @version         1.0
+// @description     This is a sample server call server.
+// @BasePath /
+
 func main() {
 	r := gin.Default()
 	godotenv.Load()
