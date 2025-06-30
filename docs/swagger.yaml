@@ -45,9 +45,6 @@ paths:
       tags:
       - users
     post:
-      consumes:
-      - application/json
-      description: Create a user from JSON input
       parameters:
       - description: User Data
         in: body
@@ -55,6 +52,22 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/models.Profile'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: update  user from JSON input
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
       produces:
       - application/json
       responses:
@@ -63,8 +76,7 @@ paths:
           schema:
             $ref: '#/definitions/models.Response'
       tags:
-      - createusers
-  /users/{id}:
+      - Update
     get:
       consumes:
       - application/json
@@ -87,14 +99,7 @@ paths:
     patch:
       consumes:
       - application/json
-      description: update  user from JSON input
-      parameters:
-      - description: User Data
-        in: body
-        name: user
-        required: true
-        schema:
-          $ref: '#/definitions/models.Profile'
+      description: Delete  user
       produces:
       - application/json
       responses:

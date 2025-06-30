@@ -37,16 +37,6 @@ const docTemplate = `{
                 }
             },
             "post": {
-                "description": "Create a user from JSON input",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "createusers"
-                ],
                 "parameters": [
                     {
                         "description": "User Data",
@@ -98,7 +88,7 @@ const docTemplate = `{
                     }
                 }
             },
-            "patch": {
+            "delete": {
                 "description": "update  user from JSON input",
                 "consumes": [
                     "application/json"
@@ -111,14 +101,32 @@ const docTemplate = `{
                 ],
                 "parameters": [
                     {
-                        "description": "User Data",
-                        "name": "user",
-                        "in": "body",
-                        "required": true,
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/models.Profile"
+                            "$ref": "#/definitions/models.Response"
                         }
                     }
+                }
+            },
+            "patch": {
+                "description": "Delete  user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Update"
                 ],
                 "responses": {
                     "201": {
