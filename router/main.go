@@ -1,7 +1,6 @@
 package router
 
 import (
-	"minitask2/docs"
 	"net/http"
 
 	docs "github.com/HN721/fgo24-be-crud/docs"
