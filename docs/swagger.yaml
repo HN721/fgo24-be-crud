@@ -19,4 +19,24 @@ paths:
             type: string
       tags:
       - users
+  /users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: list One users
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: string
+          schema:
+            type: string
+      tags:
+      - users
 swagger: "2.0"

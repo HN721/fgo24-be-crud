@@ -32,6 +32,14 @@ func GetAlluser(ctx *gin.Context) {
 	})
 
 }
+
+// @Description list One users
+// @Tags users
+// @Accept json
+// @Produce json
+// @Success 200 {string} string "string"
+// @Param id path int true "User ID"
+// @Router /users/{id} [get]
 func GetOne(ctx *gin.Context) {
 	id := ctx.Param("id")
 	users := models.FindUserById(id)
