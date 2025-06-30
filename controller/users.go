@@ -49,6 +49,16 @@ func GetOne(ctx *gin.Context) {
 		Result:  users,
 	})
 }
+
+// @Description Create a user from JSON input
+// @Tags createusers
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+
+// @Param user body models.Profile true "User Data"
+// @Success 201 {object} models.Response
+// @Router /users [post]
 func CreateUser(ctx *gin.Context) {
 	var user models.Profile
 
@@ -76,6 +86,14 @@ func CreateUser(ctx *gin.Context) {
 		Result:  newUser,
 	})
 }
+
+// @Description update  user from JSON input
+// @Tags Update
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Success 201 {object} models.Response
+// @Router /users/{id} [delete]
 func UpdateUserCTRL(ctx *gin.Context) {
 	id := ctx.Param("id")
 	var input models.Profile
@@ -104,6 +122,13 @@ func UpdateUserCTRL(ctx *gin.Context) {
 		Message: "Berhasil update user",
 	})
 }
+
+// @Description Delete  user
+// @Tags Update
+// @Accept json
+// @Produce json
+// @Success 201 {object} models.Response
+// @Router /users/{id} [patch]
 func DeleteUser(ctx *gin.Context) {
 	id := ctx.Param("id")
 	err := models.DeleteUser(id)

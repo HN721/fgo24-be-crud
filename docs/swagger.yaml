@@ -1,4 +1,29 @@
 basePath: /
+definitions:
+  models.Profile:
+    properties:
+      email:
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - username
+    type: object
+  models.Response:
+    properties:
+      errors:
+        type: string
+      message:
+        type: string
+      result: {}
+      success:
+        type: boolean
+    type: object
 info:
   contact: {}
   description: This is a sample server call server.
@@ -19,6 +44,26 @@ paths:
             type: string
       tags:
       - users
+    post:
+      consumes:
+      - application/json
+      description: Create a user from JSON input
+      parameters:
+      - description: User Data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.Profile'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+      tags:
+      - createusers
   /users/{id}:
     get:
       consumes:
@@ -39,4 +84,24 @@ paths:
             type: string
       tags:
       - users
+    patch:
+      consumes:
+      - application/json
+      description: update  user from JSON input
+      parameters:
+      - description: User Data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/models.Profile'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Response'
+      tags:
+      - Update
 swagger: "2.0"
