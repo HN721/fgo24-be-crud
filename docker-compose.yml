@@ -2,7 +2,7 @@ services:
   app:
     build: .
     ports:
-      - 8080:8888
+      - 8888:8888
     networks:
       - netapp
   db:
@@ -11,7 +11,7 @@ services:
       - POSTGRES_PASSWORD=721
     volumes:
       - data_postgres:/var/lib/postgresql/data
-      - ./data.sql:/docker-entrpoint-init.db.d/data.sql
+      - ./data.sql:/docker-entrypoint-initdb.d/data.sql
     networks:
       - netapp
   redis:
