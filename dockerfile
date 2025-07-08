@@ -1,15 +1,11 @@
-FROM golang:alpine AS build
+FROM golang:alpine as build
 
-WORKDIR /Build
-
+WORKDIR /buildapp
 COPY . .
-
 RUN go build -o goapp main.go
 
 FROM alpine:3.22
-
 WORKDIR /app
-
-COPY --from=build /Build/goapp /app/goapp
-
-ENTRYPOINT ["/app/goapp"]
+COPY --from=build /buildapp/goapp /app/goapp
+COPY .env /app/.env
+ENTRYPOINT [ "/app/goapp" ]
