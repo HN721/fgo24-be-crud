@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"minitask2/router"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
@@ -17,6 +19,11 @@ func main() {
 	godotenv.Load()
 	router.CombineRouter(r)
 
-	r.Run()
+	port := os.Getenv("APP_PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	r.Run(fmt.Sprintf(":%s", port))
 
 }

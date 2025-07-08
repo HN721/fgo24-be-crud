@@ -1,4 +1,4 @@
--- Active: 1750554601825@@127.0.0.1@5434@postgres
+-- Active: 1751942742045@@127.0.0.1@5432@postgres
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255),

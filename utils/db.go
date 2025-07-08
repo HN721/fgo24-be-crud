@@ -2,8 +2,6 @@ package utils
 
 import (
 	"context"
-	"fmt"
-	"os"
 
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/joho/godotenv"
@@ -11,14 +9,8 @@ import (
 
 func DBConnect() (*pgxpool.Conn, error) {
 	godotenv.Load()
-	connection := fmt.Sprintf(
-		"postgres://%s:%s@%s:%s/%s",
-		os.Getenv("PGUSER"),
-		os.Getenv("PGPASSWORD"),
-		os.Getenv("PGHOST"),
-		os.Getenv("PGPORT"),
-		os.Getenv("PGDATABASE"),
-	)
+	connection := "postgres://postgres:721@db:5432/postgres"
+
 	pool, err := pgxpool.New(
 		context.Background(), connection,
 	)
