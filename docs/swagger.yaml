@@ -47,11 +47,6 @@ paths:
       - application/json
       description: Create a user from JSON input
       parameters:
-      - description: User ID
-        in: path
-        name: id
-        required: true
-        type: integer
       - description: User Data
         in: body
         name: user
