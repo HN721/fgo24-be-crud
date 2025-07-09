@@ -104,7 +104,6 @@ func GetOne(ctx *gin.Context) {
 // @Tags Users
 // @Accept json
 // @Produce json
-// @Param id path int true "User ID"
 // @Param user body models.Profile true "User Data"
 // @Success 201 {object} models.Response
 // @Router /users [post]
