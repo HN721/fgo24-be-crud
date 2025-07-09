@@ -20,7 +20,7 @@ func MiddlewareFunc() gin.HandlerFunc {
 }
 
 // @Description list all users
-// @Tags users
+// @Tags Users
 // @Accept json
 // @Produce json
 // @Success 200 {string} string "string"
@@ -61,7 +61,7 @@ func GetAlluser(ctx *gin.Context) {
 }
 
 // @Description list One users
-// @Tags users
+// @Tags Users
 // @Accept json
 // @Produce json
 // @Success 200 {string} string "string"
@@ -101,11 +101,10 @@ func GetOne(ctx *gin.Context) {
 }
 
 // @Description Create a user from JSON input
-// @Tags createusers
+// @Tags Users
 // @Accept json
 // @Produce json
 // @Param id path int true "User ID"
-
 // @Param user body models.Profile true "User Data"
 // @Success 201 {object} models.Response
 // @Router /users [post]
@@ -120,7 +119,7 @@ func CreateUser(ctx *gin.Context) {
 		})
 		return
 	}
-	newUser, err := models.CreateUser(user)
+	_, err = models.CreateUser(user)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, models.Response{
 			Success: false,
@@ -133,13 +132,12 @@ func CreateUser(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, models.Response{
 		Success: true,
 		Message: "User created",
-		Result:  newUser,
 	})
 
 }
 
 // @Description update  user from JSON input
-// @Tags Update
+// @Tags Users
 // @Accept json
 // @Produce json
 // @Param id path int true "User ID"
@@ -176,7 +174,7 @@ func UpdateUserCTRL(ctx *gin.Context) {
 }
 
 // @Description Delete  user
-// @Tags Update
+// @Tags Users
 // @Accept json
 // @Produce json
 // @Success 201 {object} models.Response

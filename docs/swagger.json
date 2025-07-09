@@ -18,7 +18,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "users"
+                    "Users"
                 ],
                 "responses": {
                     "200": {
@@ -30,7 +30,24 @@
                 }
             },
             "post": {
+                "description": "Create a user from JSON input",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
                 "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "User ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
                     {
                         "description": "User Data",
                         "name": "user",
@@ -61,7 +78,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "users"
+                    "Users"
                 ],
                 "parameters": [
                     {
@@ -90,7 +107,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Update"
+                    "Users"
                 ],
                 "parameters": [
                     {
@@ -119,7 +136,7 @@
                     "application/json"
                 ],
                 "tags": [
-                    "Update"
+                    "Users"
                 ],
                 "responses": {
                     "201": {
@@ -142,9 +159,6 @@
             "properties": {
                 "email": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 },
                 "password": {
                     "type": "string"
