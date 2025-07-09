@@ -1,9 +1,9 @@
 services:
   app:
-    build: .
-    ports:
-      - 8888:8888
-    networks:
+     image: ghcr.io/hn721/fgo24-be-crud:latest
+     ports:
+      - 8888:8080
+     networks:
       - netapp
   db:
     image: postgres
