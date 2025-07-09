@@ -1,15 +1,50 @@
-name: Push Backend Imge to ghcr
+name: Push Backend Image to GHCR and Deploy to VPS
 run-name: Release Image GHCR
-on: [push]
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  push-image-to-ghcr:
+  build-and-push:
+    name: Build & Push Docker Image to GHCR
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "Checkout to My great API to ghcr"
       - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Build and publish a Docker image for ${{ github.repository }}
-        uses: macbre/push-to-ghcr@master
+
+      - name: Log in to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Build Docker Image
+        run: |
+          docker build -t ghcr.io/${{ github.repository }}:latest .
+
+      - name: Push Docker Image to GHCR
+        run: |
+          docker push ghcr.io/${{ github.repository }}:latest
+
+  deploy:
+    name: Deploy to VPS
+    needs: build-and-push
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Connect & Deploy to VPS
+        uses: appleboy/ssh-action@v0.1.10
         with:
-          image_name: ${{ github.repository }} # it will be lowercased internally
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          host: 146.190.102.54
+          username: hosea
+          key: ${{ secrets.VPS_PRIVATE_KEY }}
+          port: 9201
+          script: |
+            echo "Pulling latest image from GHCR..."
+            docker login ghcr.io -u ${{ github.actor }} --password ${{ secrets.HOSEA_TOKEN }}
+            docker pull ghcr.io/${{ github.repository }}:latest
+            echo "Stopping existing container..."
+            docker stop my-backend-app || true
+            docker rm my-backend-app || true
+            echo "Starting new container..."
+            docker run -d --name my-backend-app -p 9203:PORT_IN_CONTAINER ghcr.io/${{ github.repository }}:latest
