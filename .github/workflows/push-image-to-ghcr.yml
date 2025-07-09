@@ -47,4 +47,4 @@ jobs:
             docker stop my-backend-app || true
             docker rm my-backend-app || true
             echo "Starting new container..."
-            docker run -d --name my-backend-app -p 9203:8080 ghcr.io/hn721/fgo24-be-crud:latest
+            docker run -d --name my-backend-app -p 9203:8888 ghcr.io/hn721/fgo24-be-crud:latest
