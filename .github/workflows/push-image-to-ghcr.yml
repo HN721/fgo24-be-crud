@@ -41,10 +41,10 @@ jobs:
           port: 9201
           script: |
             echo "Pulling latest image from GHCR..."
+            echo "Pulling latest image from GHCR..."
             docker login ghcr.io -u ${{ github.actor }} --password ${{ secrets.HOSEA_TOKEN }}
-            docker pull ghcr.io/${{ github.repository }}:latest
+            docker pull ghcr.io/hn721/fgo24-be-crud:latest
             echo "Stopping existing container..."
-            docker stop my-backend-app || true
-            docker rm my-backend-app || true
+            docker compose down || true
             echo "Starting new container..."
-            docker run -d --name my-backend-app -p 9203:8888 ghcr.io/hn721/fgo24-be-crud:latest
+            docker compose up -d
