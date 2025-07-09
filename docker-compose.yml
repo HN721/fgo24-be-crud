@@ -2,7 +2,7 @@ services:
   app:
      image: ghcr.io/hn721/fgo24-be-crud:latest
      ports:
-      - 8888:8080
+      - 9203:8080
      networks:
       - netapp
   db:
